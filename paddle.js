@@ -7,7 +7,7 @@ function Paddle(canvas, x) {
     this.x = x;
     // Center the paddle vertically
     this.y = (canvas.height - this.height) / 2;
-}
+};
 
 Paddle.prototype = {
     move: function() {
