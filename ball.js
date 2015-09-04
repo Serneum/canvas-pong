@@ -28,7 +28,7 @@ Ball.prototype = {
         this.canvasContext.fill();
     },
     bounce: function() {
-        if (this.y >= this.canvas.height || this.y <= 0) {
+        if ((this.y + this.radius) >= this.canvas.height || (this.y - this.radius) <= 0) {
             this.bounceVelY();
         }
 
