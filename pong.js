@@ -30,11 +30,22 @@ function calculateMousePos(event) {
     };
 }
 
+function aiMovement() {
+    var center = aiPaddle.y + (aiPaddle.height / 2);
+    if (center < ball.y - 35) {
+        aiPaddle.move(aiPaddle.y + 6);
+    }
+    else if (center > ball.y + 35) {
+        aiPaddle.move(aiPaddle.y - 6);
+    }
+}
+
 function update() {
     canvas.addEventListener('mousemove', function(evt) {
         var mousePos = calculateMousePos(evt);
         playerPaddle.move(mousePos.y);
     });
+    aiMovement();
     ball.move();
     if ((ball.y + ball.radius) >= canvas.height || (ball.y - ball.radius) <= 0) {
         ball.bounceVelY();
