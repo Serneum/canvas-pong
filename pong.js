@@ -1,14 +1,16 @@
 var canvas;
 var canvasContext;
 var ball;
-// var playerPaddle = new Paddle(canvas, 0);
-// var aiPaddle = new Paddle(canvas, canvas.width - 10, 375);
+var playerPaddle;
+var aiPaddle;
 
 window.onload = function() {
     canvas = document.getElementById('pong');
     canvasContext = canvas.getContext('2d');
 
     ball = new Ball(canvas);
+    playerPaddle = new Paddle(canvas, 5);
+    aiPaddle = new Paddle(canvas, canvas.width - 15);
 
     var framesPerSecond = 60;
     setInterval(gameLoop, 1000 / framesPerSecond);
@@ -26,6 +28,8 @@ function move() {
 function draw() {
     drawCanvas();
     ball.draw();
+    playerPaddle.draw();
+    aiPaddle.draw();
 }
 
 function drawCanvas() {

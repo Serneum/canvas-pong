@@ -15,6 +15,6 @@ Paddle.prototype = {
     },
     draw: function() {
         this.canvasContext.fillStyle = 'white';
-        this.canvasContext.fillRect = (this.x, this.y, this.width, this.height);
+        this.canvasContext.fillRect(this.x, this.y, this.width, this.height);
     }
 };
