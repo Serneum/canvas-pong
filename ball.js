@@ -19,22 +19,12 @@ Ball.prototype = {
     move: function() {
         this.x += this.velX;
         this.y += this.velY;
-        this.bounce();
     },
     draw: function() {
         this.canvasContext.fillStyle = 'white';
         this.canvasContext.beginPath();
         this.canvasContext.arc(this.x, this.y, this.radius, 0, Math.PI * 2, true);
         this.canvasContext.fill();
-    },
-    bounce: function() {
-        if ((this.y + this.radius) >= this.canvas.height || (this.y - this.radius) <= 0) {
-            this.bounceVelY();
-        }
-
-        if (this.x < 0 || this.x > this.canvas.width) {
-            this.reset();
-        }
     },
     bounceVelX: function() {
         this.velX = -this.velX;
