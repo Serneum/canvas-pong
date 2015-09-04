@@ -11,7 +11,7 @@ window.onload = function() {
     ball = new Ball(canvas);
 
     var framesPerSecond = 60;
-    setInterval(draw, 1000 / framesPerSecond);
+    setInterval(gameLoop, 1000 / framesPerSecond);
 }
 
 function gameLoop() {
@@ -20,7 +20,7 @@ function gameLoop() {
 }
 
 function move() {
-    // ball.move();
+    ball.move();
 }
 
 function draw() {

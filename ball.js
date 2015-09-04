@@ -8,8 +8,9 @@ function Ball(canvas) {
     this.y = (this.canvas.height / 2) - this.radius;
 
     // Random starting direction/angle
-    this.velX = 5;
-    this.velY = 5;
+    var angle = getRandomAngle();
+    this.velX = getRandomVelocity() * Math.cos(angle);
+    this.velY = getRandomVelocity() * Math.sin(angle);
 };
 
 Ball.prototype = {
@@ -34,3 +35,17 @@ Ball.prototype = {
         }
     }
 };
+
+function getRandomVelocity() {
+    return 5 * [-1 ,1][Math.round(Math.random())];
+}
+
+// There's a chance the ball could end up at an angle that take forever to get to a player. Fine-tune later
+function getRandomAngle() {
+    // Never get an angle that is purely horizontal or vertical
+    var angle;
+    do {
+        angle = Math.round(Math.random() * 340) + 20;
+    } while (angle % 90 == 0);
+    return angle;
+}
