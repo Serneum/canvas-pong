@@ -1,0 +1,38 @@
+<html>
+  <head>
+  </head>
+  <body>
+    <script>
+        var ballX = 50;
+        var ballY = 50;
+
+        window.onload = function() {
+            var framesPerSecond = 60;
+            setInterval(gameLoop, 1000 / framesPerSecond);
+        }
+
+        function gameLoop() {
+            drawCanvas();
+            drawBall();
+            drawPaddles();
+        }
+
+        function drawCanvas() {
+            var canvas = document.getElementById('pong');
+            var canvasContext = canvas.getContext('2d');
+            canvasContext.fillStyle = 'black';
+            canvasContext.fillRect(0, 0, canvas.width, canvas.height);
+        }
+
+        function drawBall() {
+            
+        }
+
+        function drawPaddle() {
+
+        }
+    </script>
+    <canvas id="pong" width="800" height="600">
+    </canvas
+  </body>
+</html>
