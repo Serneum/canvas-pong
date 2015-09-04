@@ -14,12 +14,24 @@ window.onload = function() {
     playerPaddle = new Paddle(canvas, 5);
     aiPaddle = new Paddle(canvas, canvas.width - 15);
 
-    var framesPerSecond = 90;
-    setInterval(function() {
-        update();
-        draw();
-    }, 1000 / framesPerSecond);
+    // usage:
+    // instead of setInterval(render, 16) ....
+    (function animloop(){
+      requestAnimFrame(animloop);
+      update();
+      draw();
+    })();
 }
+
+// shim layer with setTimeout fallback
+window.requestAnimFrame = (function() {
+    return  window.requestAnimationFrame       ||
+          window.webkitRequestAnimationFrame ||
+          window.mozRequestAnimationFrame    ||
+          function( callback ){
+              window.setTimeout(callback, 1000 / 60);
+          };
+})();
 
 function calculateMousePos(event) {
     var rect = canvas.getBoundingClientRect();
@@ -31,12 +43,15 @@ function calculateMousePos(event) {
 }
 
 function aiMovement() {
-    var center = aiPaddle.y + (aiPaddle.height / 2);
-    if (center < ball.y - 35) {
-        aiPaddle.move(aiPaddle.y + 6);
-    }
-    else if (center > ball.y + 35) {
-        aiPaddle.move(aiPaddle.y - 6);
+    // Only move if the ball is approaching and on the AI paddle's side
+    if (ball.velX > 0 && ball.x > canvas.width / 2) {
+        var center = aiPaddle.y + (aiPaddle.height / 2);
+        if (center < ball.y - 35) {
+            aiPaddle.move(aiPaddle.y + 6);
+        }
+        else if (center > ball.y + 35) {
+            aiPaddle.move(aiPaddle.y - 6);
+        }
     }
 }
 
@@ -66,11 +81,13 @@ function update() {
 }
 
 function draw() {
+    canvasContext.beginPath();
     drawCanvas();
     ball.draw();
     playerPaddle.draw();
     aiPaddle.draw();
     drawScores();
+    canvasContext.closePath();
 }
 
 function drawCanvas() {

@@ -1,4 +1,5 @@
 function Ball(canvas) {
+    this.speed = 7.5;
     this.canvas = canvas;
     this.canvasContext = this.canvas.getContext('2d');
     this.radius = 10;
@@ -13,8 +14,8 @@ Ball.prototype = {
 
         // Random starting direction/angle
         var angle = getRandomAngle();
-        this.velX = getRandomVelocity() * Math.cos(angle);
-        this.velY = getRandomVelocity() * Math.sin(angle);
+        this.velX = getRandomVelocity(this.speed) * Math.cos(angle);
+        this.velY = getRandomVelocity(this.speed) * Math.sin(angle);
     },
     move: function() {
         this.x += this.velX;
@@ -22,7 +23,6 @@ Ball.prototype = {
     },
     draw: function() {
         this.canvasContext.fillStyle = 'white';
-        this.canvasContext.beginPath();
         this.canvasContext.arc(this.x, this.y, this.radius, 0, Math.PI * 2, true);
         this.canvasContext.fill();
     },
@@ -45,16 +45,16 @@ Ball.prototype = {
             // Max bounce angle is 75 degrees
             var angle = normalizedDelta * (5 * Math.PI / 12);
             // Determine new velocities. Make sure the X velocity sign matches the old sign
-            this.velX = 5 * Math.cos(angle) * (this.velX < 0 ? -1 : 1);
-            this.velY = 5 * Math.sin(angle);
+            this.velX = this.speed * Math.cos(angle) * (this.velX < 0 ? -1 : 1);
+            this.velY = this.speed * Math.sin(angle);
             this.bounceVelX();
         }
     }
 };
 
 // Get a random velocity for the ball's initial movement
-function getRandomVelocity() {
-    return 5 * [-1 ,1][Math.round(Math.random())];
+function getRandomVelocity(speed) {
+    return speed * [-1 ,1][Math.round(Math.random())];
 }
 
 // Get an angle for the ball's initial movement
