@@ -1,4 +1,4 @@
-var Ball = function(canvas) {
+function Ball(canvas) {
     this.canvas = canvas;
     this.canvasContext = this.canvas.getContext('2d');
     this.radius = 10;
