@@ -43,12 +43,15 @@ function calculateMousePos(event) {
 }
 
 function aiMovement() {
-    var center = aiPaddle.y + (aiPaddle.height / 2);
-    if (center < ball.y - 35) {
-        aiPaddle.move(aiPaddle.y + 6);
-    }
-    else if (center > ball.y + 35) {
-        aiPaddle.move(aiPaddle.y - 6);
+    // Only move if the ball is approaching and on the AI paddle's side
+    if (ball.velX > 0 && ball.x > canvas.width / 2) {
+        var center = aiPaddle.y + (aiPaddle.height / 2);
+        if (center < ball.y - 35) {
+            aiPaddle.move(aiPaddle.y + 6);
+        }
+        else if (center > ball.y + 35) {
+            aiPaddle.move(aiPaddle.y - 6);
+        }
     }
 }
 
