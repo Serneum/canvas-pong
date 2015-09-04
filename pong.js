@@ -14,7 +14,7 @@ window.onload = function() {
     playerPaddle = new Paddle(canvas, 5);
     aiPaddle = new Paddle(canvas, canvas.width - 15);
 
-    var framesPerSecond = 60;
+    var framesPerSecond = 90;
     setInterval(function() {
         update();
         draw();
@@ -82,7 +82,7 @@ function drawScores() {
     canvasContext.fillStyle = 'white';
 
     // Draw 'net'
-    for (var i = 0; i < canvas.height; i += 40) {
+    for (var i = 0; i < canvas.height; i += 35) {
         canvasContext.fillRect((canvas.width / 2) - 1, i, 2, 20);
     }
 
