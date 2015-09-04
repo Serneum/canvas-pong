@@ -23,6 +23,14 @@ function gameLoop() {
 
 function move() {
     ball.move();
+
+    // Check collisions against the paddle the ball is heading towards
+    if (ball.velX < 0) {
+        ball.checkCollision(playerPaddle);
+    }
+    else {
+        ball.checkCollision(aiPaddle);
+    }
 }
 
 function draw() {

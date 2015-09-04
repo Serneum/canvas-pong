@@ -8,7 +8,7 @@ function Ball(canvas) {
     this.y = (this.canvas.height / 2) - this.radius;
 
     // Random starting direction/angle
-    var angle = getRandomAngle();
+    var angle = 0; //getRandomAngle();
     this.velX = getRandomVelocity() * Math.cos(angle);
     this.velY = getRandomVelocity() * Math.sin(angle);
 };
@@ -27,11 +27,28 @@ Ball.prototype = {
     },
     bounce: function() {
         if (this.x >= this.canvas.width || this.x <= 0) {
-            this.velX = -this.velX;
+            this.bounceVelX();
         }
 
         if (this.y >= this.canvas.height || this.y <= 0) {
-            this.velY = -this.velY;
+            this.bounceVelY();
+        }
+    },
+    bounceVelX: function() {
+        this.velX = -this.velX;
+    },
+    bounceVelY: function() {
+        this.velY = -this.velY;
+    },
+    checkCollision: function(paddle) {
+        // Adjust the collision detection to the right side of the paddle if we are checking against the left paddle
+        var paddleCollision = paddle.x;
+        if (this.x < (this.canvas.width / 2)) {
+            paddleCollision += paddle.width;
+        }
+
+        if (this.y > paddle.y && this.y < (paddle.y + paddle.height) && (Math.abs(this.x - paddleCollision) < paddle.width)) {
+            this.bounceVelX();
         }
     }
 };
