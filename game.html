@@ -2,37 +2,43 @@
   <head>
   </head>
   <body>
-    <script>
-        var ballX = 50;
-        var ballY = 50;
+    <canvas id="pong" width="800" height="600">
+    </canvas>
+    <!-- <script src="ball.js"/>
+    <script src="paddle.js"/> -->
+    <script type="text/javascript">
+        var canvas;
+        var canvasContext;
+        // var ball = new Ball(canvas);
+        // var playerPaddle = new Paddle(canvas, 0);
+        // var aiPaddle = new Paddle(canvas, canvas.width - 10, 375);
 
         window.onload = function() {
+            canvas = document.getElementById('pong');
+            canvasContext = canvas.getContext('2d');
             var framesPerSecond = 60;
-            setInterval(gameLoop, 1000 / framesPerSecond);
-        }
-
-        function gameLoop() {
-            drawCanvas();
-            drawBall();
-            drawPaddles();
-        }
-
-        function drawCanvas() {
-            var canvas = document.getElementById('pong');
-            var canvasContext = canvas.getContext('2d');
-            canvasContext.fillStyle = 'black';
-            canvasContext.fillRect(0, 0, canvas.width, canvas.height);
-        }
-
-        function drawBall() {
+            setInterval(draw, 1000 / framesPerSecond);
             
         }
 
-        function drawPaddle() {
+        function gameLoop() {
+            move();
+            draw();
+        }
 
+        function move() {
+            // ball.move();
+        }
+
+        function draw() {
+            drawCanvas();
+            // ball.draw();
+        }
+
+        function drawCanvas() {
+            canvasContext.fillStyle = 'black';
+            canvasContext.fillRect(0, 0, canvas.width, canvas.height);
         }
     </script>
-    <canvas id="pong" width="800" height="600">
-    </canvas
   </body>
 </html>
