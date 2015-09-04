@@ -16,12 +16,25 @@ window.onload = function() {
     setInterval(gameLoop, 1000 / framesPerSecond);
 }
 
+function calculateMousePos(event) {
+    var rect = canvas.getBoundingClientRect();
+    var root = document.documentElement;
+    return {
+        x: event.clientX - rect.left - root.scrollLeft,
+        y: event.clientY - rect.top - root.scrollTop
+    };
+}
+
 function gameLoop() {
     move();
     draw();
 }
 
 function move() {
+    canvas.addEventListener('mousemove', function(evt) {
+        var mousePos = calculateMousePos(evt);
+        playerPaddle.move(mousePos.y);
+    });
     ball.move();
 
     // Check collisions against the paddle the ball is heading towards

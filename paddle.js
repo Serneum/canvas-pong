@@ -10,8 +10,8 @@ function Paddle(canvas, x) {
 };
 
 Paddle.prototype = {
-    move: function() {
-        this.y += 0;
+    move: function(newY) {
+        this.y = newY;
     },
     draw: function() {
         this.canvasContext.fillStyle = 'white';
