@@ -55,16 +55,17 @@ Ball.prototype = {
     }
 };
 
+// Get a random velocity for the ball's initial movement
 function getRandomVelocity() {
     return 5 * [-1 ,1][Math.round(Math.random())];
 }
 
-// There's a chance the ball could end up at an angle that take forever to get to a player. Fine-tune later
+// Get an angle for the ball's initial movement
 function getRandomAngle() {
-    // Never get an angle that is purely horizontal or vertical
-    var angle;
-    do {
-        angle = Math.round(Math.random() * 340) + 20;
-    } while (angle % 90 == 0);
-    return angle;
+    // Get -25 or 25
+    var angleDifferential = [-1, 1][Math.round(Math.random())] * Math.round(Math.random() * 25);
+    // Get a multiplier between 1 and 4
+    var multiplier = Math.floor((Math.random() * 4) + 1);
+    // Get an angle between 20 and 70 degrees in any of the four quadrants
+    return (45 + angleDifferential) * multiplier;
 }
