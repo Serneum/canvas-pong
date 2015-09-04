@@ -1,4 +1,3 @@
-# canvas-pong
 An implementation of Pong using HTML's canvas element and JavaScript
 
 ## How to Play
