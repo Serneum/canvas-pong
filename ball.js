@@ -62,10 +62,11 @@ function getRandomVelocity() {
 
 // Get an angle for the ball's initial movement
 function getRandomAngle() {
-    // Get -25 or 25
+    // Get a value between -25 and 25
     var angleDifferential = [-1, 1][Math.round(Math.random())] * Math.round(Math.random() * 25);
-    // Get a multiplier between 1 and 4
-    var multiplier = Math.floor((Math.random() * 4) + 1);
+    // Get a multiplier between 0 and 3
+    var multiplier = Math.floor(Math.random() * 4);
     // Get an angle between 20 and 70 degrees in any of the four quadrants
-    return (45 + angleDifferential) * multiplier;
+    var degrees = (45 + angleDifferential) + (90 * multiplier);
+    return degrees * (Math.PI / 180);
 }
