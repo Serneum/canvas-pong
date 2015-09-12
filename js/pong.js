@@ -74,7 +74,7 @@ function update() {
     });
     aiMovement();
     ball.move();
-    if ((ball.y + ball.radius) >= gameLayer.height || (ball.y - ball.radius) <= 0) {
+    if (((ball.y + ball.radius) >= gameLayer.height && ball.velY > 0) || ((ball.y - ball.radius) <= 0 && ball.velY < 0)) {
         ball.bounceVelY();
     }
 
