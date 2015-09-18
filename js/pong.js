@@ -70,7 +70,14 @@ function aiMovement() {
 function update() {
     gameLayer.addEventListener('mousemove', function(evt) {
         var mousePos = calculateMousePos(evt);
-        playerPaddle.move(mousePos.y);
+        var paddlePos = mousePos.y - playerPaddle.height / 2;
+        if (paddlePos < 0) {
+            paddlePos = 0;
+        }
+        else if (paddlePos + playerPaddle.height > gameLayer.height) {
+                paddlePos = gameLayer.height - playerPaddle.height;
+        }
+        playerPaddle.move(paddlePos);
     });
     aiMovement();
     ball.move();
